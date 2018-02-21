@@ -18,7 +18,7 @@ var cases = [];
 // Now the functions to play
 
 function newGame() {
-  //reset all the initial variables except the score
+  //reset the cases
   cases = [];
 }
 
@@ -28,13 +28,18 @@ function addMark(who, where) {
     console.log("ERROR, it is up to", players[whoseTurnIsIt].name, "to play!");
     return;
   }
+  //check that the provided case is between 1 and 9
+  if (where < 1 || where > 9) {
+    console.log("ERROR, please provide a case between 1 and 9");
+    return;
+  }
   //check if the case is free
   if (cases[where]) {
-    console.log("Error, this case is already taken");
+    console.log("ERROR, this case is already taken");
     return;
   }
 
-  //add the mark
+  //add the mark to the specified position
   cases[where] = who;
 
   //printBoard
@@ -43,9 +48,19 @@ function addMark(who, where) {
   //checkIfPlayer wins
   truthTable(who);
 
+  //Switch turn
+  switchTurn();
+
+  //Check if there are still cases empty or play a new game
+  isGameFinished();
+}
+
+//Switch turn
+function switchTurn() {
   whoseTurnIsIt = whoseTurnIsIt == "x" ? "o" : "x";
 }
 
+//Check if player wins
 function truthTable(who) {
   var won = false;
   var combinations = [
@@ -54,7 +69,7 @@ function truthTable(who) {
     [2, 5, 8],
     [3, 6, 9],
     [1, 5, 9],
-    [3, 5, 9],
+    [3, 5, 7],
     [4, 5, 6],
     [7, 8, 9]
   ];
@@ -68,13 +83,14 @@ function truthTable(who) {
   });
   if (won) {
     players[who].score++;
-    console.log("Congratulations player", players[who].name, "! You have won!");
+    console.log("Congratulations ", players[who].name, " You have won!");
     console.log("Player 1 has", players.x.score, "points");
     console.log("Player 2 has", players.o.score, "points");
     newGame();
   }
 }
 
+//Print the board
 function printBoard() {
   var board = "-------------\n";
   board += "|";
@@ -88,6 +104,23 @@ function printBoard() {
     }
   }
   console.log(board);
+}
+
+//Check if there are some cases left to go on the game
+function isGameFinished() {
+  //If there is at least one case empty, get back to the game
+  for (let i = 1; i <= 9; i++) {
+    if (!cases[i]) {
+      return;
+    }
+  }
+  //Otherwise start a new game
+  console.log(
+    "It's a draw! Let's start a new one. It is up to",
+    players[whoseTurnIsIt].name,
+    "to play!"
+  );
+  newGame();
 }
 
 //shortCuts
