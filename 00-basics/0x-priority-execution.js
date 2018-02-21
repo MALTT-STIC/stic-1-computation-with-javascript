@@ -6,9 +6,9 @@ var masterCredits = 120;
 var hoursPerCredit = 30;
 
 //Wrong assignement order
-var wrongTotalSuffering = bachelorCredits + masterCredits * hoursPerCredit;
-console.log(wrongTotalSuffering); //3780
+var wrontTotal = bachelorCredits + masterCredits * hoursPerCredit;
+console.log(wrontTotal); //3780
 
 //Right assignment order
-var actualTotalSuffering = (bachelorCredits + masterCredits) * hoursPerCredit;
-console.log(actualTotalSuffering); //9000
+var rightTotal = (bachelorCredits + masterCredits) * hoursPerCredit;
+console.log(rightTotal); //9000
