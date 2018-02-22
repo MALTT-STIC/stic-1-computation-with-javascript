@@ -1,10 +1,3 @@
-/**
- * Now we want to add a penalty for wrong answers
- * We could use the same function with negative numbers
- * But this risks to cause more errors
- * So we add another function for penalties
- */
-
 var score = 0;
 
 //Function to add points

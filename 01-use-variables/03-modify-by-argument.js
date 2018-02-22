@@ -1,8 +1,3 @@
-/**
- * We may imagine a test in which questions yield a different number of points
- * We will thus slightly modify the name and the logic of our function
- */
-
 var score = 0;
 
 //Declare the function and accept an argument as number of points to add

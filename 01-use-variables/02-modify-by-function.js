@@ -1,7 +1,3 @@
-/**
- * Now we need a way to increment the score if the learner has a right answer
- */
-
 var score = 0;
 
 //Declare the function

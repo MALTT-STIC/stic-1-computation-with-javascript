@@ -1,9 +1,3 @@
-/**
- * To avoid learners excessive frustration when they are wrong
- * We don't want the score to go below 0
- * We add a control inside the function to avoid this
- */
-
 var score = 0;
 
 //Function to add points

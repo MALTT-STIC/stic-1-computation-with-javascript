@@ -1,10 +1,3 @@
-/**
- * We have a simple scaffolding of an app, but we can do better
- * For instance, we could easly forget if when we decrement
- * We need to use positive or negative numbers
- * To avoid this problem, we will "sanitize" the points
- */
-
 var score = 0;
 
 //Function to add points
