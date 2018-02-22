@@ -46,7 +46,7 @@ function addMark(who, where) {
   printBoard();
 
   //checkIfPlayer wins
-  truthTable(who);
+  isWinningMove(who);
 
   //Switch turn
   switchTurn();
@@ -61,9 +61,9 @@ function switchTurn() {
 }
 
 //Check if player wins
-function truthTable(who) {
+function isWinningMove(who) {
   var won = false;
-  var combinations = [
+  var winningCombinations = [
     [1, 2, 3],
     [1, 4, 7],
     [2, 5, 8],
@@ -73,7 +73,7 @@ function truthTable(who) {
     [4, 5, 6],
     [7, 8, 9]
   ];
-  combinations.forEach(function(el) {
+  winningCombinations.forEach(function(el) {
     var check = el.every(function(c) {
       return cases[c] == who;
     });
