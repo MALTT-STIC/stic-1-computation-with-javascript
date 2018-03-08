@@ -12,24 +12,31 @@ var players = {
     score: 0
   }
 };
+
+//It is up to x to make the first move
 var whoseTurnIsIt = "x";
+
+//The 9 cases are empty by defualt
 var cases = [];
 
-// Now the functions to play
+/**
+ * Now the functions for the game
+ */
 
+//Reset the cases to have a new game
 function newGame() {
-  //reset the cases
   cases = [];
 }
 
+//This is the main function that add the mark to the case and makes the cheks
 function addMark(who, where) {
   //check if it is the right turn
   if (whoseTurnIsIt != who) {
     console.log("ERROR, it is up to", players[whoseTurnIsIt].name, "to play!");
     return;
   }
-  //check that the provided case is between 1 and 9
-  if (where < 1 || where > 9) {
+  //check that the provided case is between 1 and 9 and it is an integer
+  if (where < 1 || where > 9 || parseInt(where) !== where) {
     console.log("ERROR, please provide a case between 1 and 9");
     return;
   }
@@ -57,7 +64,11 @@ function addMark(who, where) {
 
 //Switch turn
 function switchTurn() {
-  whoseTurnIsIt = whoseTurnIsIt == "x" ? "o" : "x";
+  if (whoseTurnIsIt == "x") {
+    whoseTurnIsIt = "o";
+  } else {
+    whoseTurnIsIt = "x";
+  }
 }
 
 //Check if player wins
@@ -73,14 +84,21 @@ function isWinningMove(who) {
     [4, 5, 6],
     [7, 8, 9]
   ];
-  winningCombinations.forEach(function(el) {
-    var check = el.every(function(c) {
-      return cases[c] == who;
-    });
-    if (check) {
+
+  //Iterate the combinations
+  for (let i = 0; i < winningCombinations.length; i++) {
+    //Retrieve the symbole inside the three winning cases
+    let case1 = cases[winningCombinations[i][0]];
+    let case2 = cases[winningCombinations[i][1]];
+    let case3 = cases[winningCombinations[i][2]];
+
+    //Check if all the cases have the same symbol and are not empty
+    if (case1 && case1 === case2 && case2 === case3) {
       won = true;
     }
-  });
+  }
+
+  //If the player has won, show a message, increase the score, and start a new game
   if (won) {
     players[who].score++;
     console.log("Congratulations ", players[who].name, " You have won!");
@@ -123,12 +141,10 @@ function isGameFinished() {
   newGame();
 }
 
-//shortCuts
+//shortCuts so that you must use commands such as x(1) or o(9)
 function x(where) {
   addMark("x", where);
 }
 function o(where) {
   addMark("o", where);
 }
-
-//.load ./tic-tac-toe/01-setup.js
